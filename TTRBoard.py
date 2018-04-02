@@ -1,5 +1,6 @@
 import networkx as nx
-import pylab
+import matplotlib as mpl
+mpl.use('TkAgg')
 
 class Board(object):
     def __init__(self):

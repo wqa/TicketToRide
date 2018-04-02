@@ -91,12 +91,12 @@ class Game(object):
         for player in self.players:
             #pick names
             count = 0
-            name = raw_input("Player " 
+            name = input("Player "
                             + str(self.posToMove + 1) 
                             + " please enter your name: "
                             )
             while (name in selectedNames or len(name) > 50) and count < 5:
-                name = raw_input("Player " 
+                name = input("Player "
                                 + str(self.posToMove + 1) 
                                 + " please enter your name: (Must be unique) "
                                 )
@@ -191,17 +191,17 @@ class Game(object):
         player: player object
         """
         
-        choice = raw_input("Please type: cards, trains or tickets: ")
+        choice = input("Please type: cards, trains or tickets: ")
     
         count = 0 # a way out of the loop if 5 invalid responses
         while choice not in ['cards', 'trains', 'tickets'] and count < 5:
-            choice = raw_input("Invalid repsonse. Please select either cards, "
+            choice = input("Invalid repsonse. Please select either cards, "
                                + "trains or tickets: ")
             count += 1
 
-        #displayMap = raw_input("Display map? y/n: ")
+        #displayMap = input("Display map? y/n: ")
         #if displayMap == 'y':
-        #    pauseTime = raw_input("For how many seconds? (between 1 and 30): ")
+        #    pauseTime = input("For how many seconds? (between 1 and 30): ")
         #    if int(pauseTime) not in range(1, 31):
         #        pass
         #    else:
@@ -230,12 +230,12 @@ class Game(object):
         print "Draw pile consists of: "
         self.printSepLine(self.deck.getDrawPile())
         
-        choice1 = raw_input("Please type a card from the above list or "
+        choice1 = input("Please type a card from the above list or "
                             + "type 'drawPile': ")
         while choice1 not in self.deck.getDrawPile() + ['drawPile'] \
                and count < 5:
 
-            choice1 = raw_input("Invalid repsonse. Please type either from " 
+            choice1 = input("Invalid repsonse. Please type either from "
                                 + str(self.deck.getDrawPile()) 
                                 + " or type 'drawPile' "
                                 )
@@ -264,13 +264,13 @@ class Game(object):
         
         self.printSepLine(self.deck.getDrawPile())
          
-        choice2 = raw_input("Please type another card from the above list or "
+        choice2 = input("Please type another card from the above list or "
                             + "type 'drawPile': ")
         while choice2 == 'wild'  \
                or (choice2 not in self.deck.getDrawPile() + ['drawPile'] \
                and count < 5):
             
-            choice2 = raw_input("Invalid repsonse. Please type either from " 
+            choice2 = input("Invalid repsonse. Please type either from "
                                 + str(self.deck.getDrawPile()) 
                                 + " or type 'drawPile' \
                                 NOTE: second choice cannot be 'wild' "
@@ -305,10 +305,10 @@ class Game(object):
         print "Your hand consists of: "
         self.printSepLine(player.getHand())
         
-        city1 = raw_input("Please type the start city of desired route: ")
+        city1 = input("Please type the start city of desired route: ")
         
         while city1 not in self.board.getCities() and count < 5:
-            city1 = raw_input("Invalid response.  "
+            city1 = input("Invalid response.  "
                               + "Please select from the above city list: "
                              )
             count += 1
@@ -329,13 +329,13 @@ class Game(object):
         + str([x for x in self.board.G.neighbors(city1) 
               if self.doesPlayerHaveCardsForEdge(player, city1, x)])
         
-        city2 = raw_input("Please type the destination city to go to from " 
+        city2 = input("Please type the destination city to go to from "
                           + str(city1) 
                           + " : "
                           )
         
         while not self.board.hasEdge(city1, city2) and count < 5:
-            city2 = raw_input("Invalid response.  "
+            city2 = input("Invalid response.  "
                               + "Please type one of the following cities "
                               + "(without quotes): \n" 
                               + str([x for x in self.board.G.neighbors(city1) 
@@ -367,7 +367,7 @@ class Game(object):
             color = spanColors[0] #use first element, getEdgeColors returns list
             print "This route is: " + str(color)
         else:
-            color = raw_input("which color track would you like to claim? (" 
+            color = input("which color track would you like to claim? ("
                               + str(spanColors) 
                               + " available): "
                               )
@@ -388,7 +388,7 @@ class Game(object):
         availWild = player.hand['wild']
         if color == 'grey':
             
-            color = raw_input("Which color would you like to play "
+            color = input("Which color would you like to play "
                               + "on this grey route? "
                               + "(pick a color, not 'wild'): "
                              )
@@ -397,13 +397,13 @@ class Game(object):
                 print "Invalid Color"
                 return "Move complete"
             availColor = player.hand[color]
-            numColor = raw_input("How many " + str(color) 
+            numColor = input("How many " + str(color)
                                  + " cards would you like to play? (" 
                                  + str(availColor) 
                                  + " available): "
                                  )
         else:
-            numColor = raw_input("How many " 
+            numColor = input("How many "
                                  + str(color) 
                                  + " cards would you like to play? (" 
                                  + str(availColor) 
@@ -418,7 +418,7 @@ class Game(object):
             return "Move complete"
 
         if numColor < routeDist: #span distance
-            numWild = raw_input("How many wild cards would you like to play? (" 
+            numWild = input("How many wild cards would you like to play? ("
                                 + str(availWild) 
                                 + " available) "
                                 )
@@ -482,7 +482,7 @@ class Game(object):
 
         while True:
             try:
-                choice = raw_input("Select the number corresponding to the "
+                choice = input("Select the number corresponding to the "
                                    +"above tickets, type 'done' when finished: "
                                    )
                 choices.add(tickets[int(choice)])
@@ -524,13 +524,13 @@ def playTTR():
     
     
     
-    numPlayers = raw_input("How many players will be playing today? "
+    numPlayers = input("How many players will be playing today? "
                             + "1,2,3,4,5 or 6? ")
 
     count = 0
     while int(numPlayers) not in range(1,7) and count < 5:
         if numPlayers == 'exit': return "Thanks for playing!"
-        numPlayers = raw_input("Please enter either 1,2,3,4,5 or 6: ")
+        numPlayers = input("Please enter either 1,2,3,4,5 or 6: ")
         count += 1
     if count >= 5:
         print "Default player count has been set to 2"
